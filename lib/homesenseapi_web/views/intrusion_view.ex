@@ -11,6 +11,15 @@ defmodule HomesenseapiWeb.IntrusionView do
   end
 
   def render("intrusion.json", %{intrusion: intrusion}) do
-    %{id: intrusion.id, intrusion: intrusion.intrusion, homesense: intrusion.homesense.area}
+    %{
+      id: intrusion.id,
+      intrusion: intrusion.intrusion,
+      homesense: %{
+        area: intrusion.homesense.area,
+        latitude: intrusion.homesense.latitude,
+        longitude: intrusion.homesense.longitude,
+        notes: intrusion.homesense.notes
+      }
+    }
   end
 end
