@@ -15,6 +15,7 @@ defmodule HomesenseapiWeb.IntrusionController do
     with {:ok, %Intrusion{} = intrusion} <- Devices.create_intrusion(intrusion_params) do
       intrusion_homesense = Devices.get_intrusion!(intrusion.id)
       send_user_alert(intrusion_homesense.id)
+
       conn
       |> put_status(:created)
       |> put_resp_header("location", Routes.intrusion_path(conn, :show, intrusion_homesense))
