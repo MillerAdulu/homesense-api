@@ -34,6 +34,7 @@ defmodule HomesenseapiWeb.IntrusionController do
     with {:ok, %Intrusion{} = intrusion} <- Devices.update_intrusion(intrusion, intrusion_params) do
       intrusion_homesense = Devices.get_intrusion!(intrusion.id)
       send_admin_alert(intrusion_homesense)
+      send_community_alert(intrusion_homesense)
       render(conn, "show.json", intrusion: intrusion_homesense)
     end
   end
@@ -59,6 +60,23 @@ defmodule HomesenseapiWeb.IntrusionController do
   end
 
   def send_admin_alert(int_hom) do
+    HTTPoison.post(
+      "https://fcm.googleapis.com/fcm/send",
+      "{\"notification\": {\"title\": \"Homesense\",\"body\": \"Intrusion Alert\",\"click_action\": \"https://homesense-app.firebaseapp.com/admin/realtime/\"},\"data\": {\"homesense\": {\"area\": \"#{
+        int_hom.homesense.area
+      }\",\"latitude\": \"#{int_hom.homesense.latitude}\",\"longitude\": \"#{
+        int_hom.homesense.longitude
+      }\",\"notes\": \"#{int_hom.homesense.notes}\"},\"id\": #{int_hom.id},\"intrusion\": #{
+        int_hom.intrusion
+      }},\"to\": \"fMo8CWnWnQw:APA91bFxJZi4DFUnkHCBuwkamE7e_HHG0AHSYL-CNse-2sq8S7If_q81oHkavjVUISXWT8mj09rOpWQDx4r7PfBRcz_UW9-5i5c6mJZ4XJM8zA5YcmXx3BLD1547p5mGFFvB8H0y0H7i\"}",
+      Authorization:
+        "key=AAAA1Ac_qfg:APA91bFAA5tHF3ZYfAV1Py0oK8W6hbPx0lBvBpy4riWT1_wz8LAy0xJEZaj0KEpl92ij3wwwMrdWJ-KhCmIR4__2VXvAs-bZdgUVG-l5hDo6Csri-HR12-a0duqgq-yDYUUgi47NlBBa",
+      "Content-Type": "application/json"
+    )
+  end
+
+  # Change the URL, token and server key
+  def send_community_alert(int_hom) do
     HTTPoison.post(
       "https://fcm.googleapis.com/fcm/send",
       "{\"notification\": {\"title\": \"Homesense\",\"body\": \"Intrusion Alert\",\"click_action\": \"https://homesense-app.firebaseapp.com/\"},\"data\": {\"homesense\": {\"area\": \"#{
