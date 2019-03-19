@@ -50,7 +50,7 @@ defmodule HomesenseapiWeb.IntrusionController do
   defp send_user_alert(homesense_id) do
     HTTPoison.post(
       "https://fcm.googleapis.com/fcm/send",
-      "{\"notification\": {\"body\":\"We suspect your home has been intruded.\",\"title\" : \"INTRUSION ALERT\"},\"to\": \"d328fsOpAIQ:APA91bGRAN_YoOpLiwTGwBJ53dwjLzm45Do_5Tl0oilWmoaj5OsVWp7DiuAx8C9nt0w1hf2mcHhqbXGpR56yNtIrEJTFNj8PRAEPuXHhhz1gBXX9aD8N_yR_NOkLSXu7WeLkfZE-80Rj\", \"data\": {\"homesense\": #{
+      "{\"notification\": {\"body\":\"We suspect your home has been intruded.\",\"title\" : \"INTRUSION ALERT\"},\"to\": \"e37yDzNizBo:APA91bF-DCEuk8J7jtomMsgSLBoT2XxX_yeLEGJQbX8sHOo_YovTEfXoi-rFN72iw9vn0ykEa1vTsecR-SYgUvePGiGSV3F5_sxOk0fkISxchMomcx0IXjtK5KngIpvZ5aNVNkZdntgh\", \"data\": {\"homesense\": #{
         homesense_id
       }}}",
       Authorization:
