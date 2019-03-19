@@ -79,15 +79,15 @@ defmodule HomesenseapiWeb.IntrusionController do
   def send_community_alert(int_hom) do
     HTTPoison.post(
       "https://fcm.googleapis.com/fcm/send",
-      "{\"notification\": {\"title\": \"Homesense\",\"body\": \"Intrusion Alert\",\"click_action\": \"https://homesense-app.firebaseapp.com/\"},\"data\": {\"homesense\": {\"area\": \"#{
+      "{\"notification\": {\"title\": \"Homesense\",\"body\": \"Intrusion Alert\",\"click_action\": \"https://homesense-community.firebaseapp.com/\"},\"data\": {\"homesense\": {\"area\": \"#{
         int_hom.homesense.area
       }\",\"latitude\": \"#{int_hom.homesense.latitude}\",\"longitude\": \"#{
         int_hom.homesense.longitude
       }\",\"notes\": \"#{int_hom.homesense.notes}\"},\"id\": #{int_hom.id},\"intrusion\": #{
         int_hom.intrusion
-      }},\"to\": \"fMo8CWnWnQw:APA91bFxJZi4DFUnkHCBuwkamE7e_HHG0AHSYL-CNse-2sq8S7If_q81oHkavjVUISXWT8mj09rOpWQDx4r7PfBRcz_UW9-5i5c6mJZ4XJM8zA5YcmXx3BLD1547p5mGFFvB8H0y0H7i\"}",
+      }},\"to\": \"eAJM2Nl3XiY:APA91bHrm-3ISQ8IuJoXDv29EO5hxnkG-TMbHdMu7dFq2w7YZ3hMTDoXY0vLTmotf3ErZVe9NKVJTfF1Y2vcSowckhUNrkt--HDfnI3pKe2ca-DBnBFynemPXFGPR20wxBWUQC8_F8Z1\"}",
       Authorization:
-        "key=AAAA1Ac_qfg:APA91bFAA5tHF3ZYfAV1Py0oK8W6hbPx0lBvBpy4riWT1_wz8LAy0xJEZaj0KEpl92ij3wwwMrdWJ-KhCmIR4__2VXvAs-bZdgUVG-l5hDo6Csri-HR12-a0duqgq-yDYUUgi47NlBBa",
+        "key=AAAAQObYPhM:APA91bEoFtaMw2c5Fw86U-xQCBMGyS90iUjRXA4wN_ZXz8U93P2jIIGeelqPlv784LxXRAU55s8Z5xlZ9_7Yq5wha0h225niqzwXguhJAYD5XAaD5J2X5gsGpT0zF1_6BnSAVTeOpHAC",
       "Content-Type": "application/json"
     )
   end
