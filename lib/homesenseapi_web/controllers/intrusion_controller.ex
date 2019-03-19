@@ -75,7 +75,6 @@ defmodule HomesenseapiWeb.IntrusionController do
     )
   end
 
-  # Change the URL, token and server key
   def send_community_alert(int_hom) do
     HTTPoison.post(
       "https://fcm.googleapis.com/fcm/send",
